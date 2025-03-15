@@ -19,6 +19,19 @@ interface FormAnswers {
     price: string;
   };
   propertyType?: string;
+  primaryResidence?: string;
+  incomeSource?: string;
+  grossIncome?: {
+    amount: string;
+  };
+  creditScore?: string;
+  loanType?: string;
+  accountDetails?: {
+    email: string;
+    firstName?: string;
+    lastName: string;
+    phoneNumber: string;
+  };
 }
 
 type FormState = {

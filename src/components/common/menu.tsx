@@ -2,6 +2,7 @@
 
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
@@ -12,6 +13,7 @@ import {
 import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const Menu = () => {
@@ -67,25 +69,35 @@ const Menu = () => {
           <SheetTitle className=" uppercase text-2xl">Menu</SheetTitle>
         </SheetHeader>
         <div className=" px-12 flex flex-col w-full gap-12 mt-12">
-          <div className="flex flex-col items-start w-full gap-2">
-            <p className=" uppercase text-muted-foreground text-lg">Dashboard</p>
-            <div className="flex flex-col items-start w-full gap-8">
-              <h2 className=" text-5xl font-semibold hover:text-primary cursor-pointer">
-                Start Application
-              </h2>
-              <h2 className=" text-5xl font-semibold hover:text-primary cursor-pointer">
-                Login
-              </h2>
+          <div className="flex flex-col items-start w-full gap-6">
+            <p className=" uppercase text-muted-foreground text-lg">
+              Dashboard
+            </p>
+            <div className="flex flex-col items-start w-full gap-4">
+              <SheetClose asChild>
+                <Link href="/">
+                  <h2 className="font-primary text-5xl font-medium hover:text-primary cursor-pointer">
+                    Start Application
+                  </h2>
+                </Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link href="/login">
+                  <h2 className="font-primary text-5xl font-medium hover:text-primary cursor-pointer">
+                    Login
+                  </h2>
+                </Link>
+              </SheetClose>
             </div>
           </div>
 
-          <div className="flex flex-col items-start w-full gap-2">
+          <div className="flex flex-col items-start w-full gap-6">
             <p className=" uppercase text-muted-foreground text-lg">Support</p>
-            <div className="flex flex-col items-start w-full gap-8">
-              <h2 className=" text-5xl font-semibold hover:text-primary cursor-pointer">
+            <div className="flex flex-col items-start w-full gap-4">
+              <h2 className="font-primary text-5xl font-medium hover:text-primary cursor-pointer">
                 FAQs
               </h2>
-              <h2 className=" text-5xl font-semibold hover:text-primary cursor-pointer">
+              <h2 className="font-primary text-5xl font-medium hover:text-primary cursor-pointer">
                 Contact Us
               </h2>
             </div>

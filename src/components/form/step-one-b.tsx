@@ -29,7 +29,7 @@ const Step1b = () => {
           Back 2
         </button>
       )}
-      <h2 className="text-5xl font-bold text-center max-w-[24ch]">
+      <h2 className="text-5xl  text-center max-w-[24ch] font-primary font-medium">
         Do you have a signed Purchase & Sale Agreement in place?
       </h2>
 

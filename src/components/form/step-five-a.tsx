@@ -52,7 +52,7 @@ const Step5a = () => {
         </div>
       )}
 
-      <h2 className="text-5xl font-bold text-center max-w-[20ch]">
+      <h2 className="text-5xl  text-center max-w-[18ch] font-primary font-medium">
         Approximately how much do you have for a down payment?
       </h2>
       <div className="w-full mt-6 px-32">

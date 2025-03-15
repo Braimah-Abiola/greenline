@@ -32,7 +32,7 @@ const Step6a = () => {
           <p className=" text-xl">Previous</p>
         </div>
       )}
-      <h2 className="text-5xl font-bold text-center max-w-[24ch]">
+      <h2 className="text-5xl  text-center max-w-[24ch] font-primary font-medium">
         What kind of property is it?
       </h2>
 

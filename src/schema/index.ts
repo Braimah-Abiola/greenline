@@ -15,3 +15,14 @@ export const purchasePriceSchema = z.object({
 export const downPaymentAmountSchema = z.object({
   price: z.string().min(1, "Downpayment amount is required"),
 });
+
+export const grossIncomeSchema = z.object({
+  amount: z.string().min(1, "Gross income is required"),
+});
+
+export const registerSchema = z.object({
+  email: z.string().email("Enter valid email"),
+  firstName: z.string().min(3, "First name is required"),
+  lastName: z.string().min(3, "Last name is required"),
+  phoneNumber: z.string().regex(/^\d{10}$/, "Phone number must be 10 digits"),
+});

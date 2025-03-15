@@ -1,31 +1,42 @@
-import React from "react";
-import { useForm } from "@/lib/form-context";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useForm } from "@/lib/form-context";
+import { ArrowLeft } from "lucide-react";
 import { Label } from "../ui/label";
 
-const Start = () => {
-  const { formState, setAnswer, nextStep } = useForm();
-  const selectedOption = String(formState.answers.start || "");
+const Step7a = () => {
+  const { formState, setAnswer, nextStep, prevStep } = useForm();
+  const selectedOption = String(formState.answers.primaryResidence || "");
 
   const handleOptionSelect = (option: string) => {
-    setAnswer("start", option);
+    setAnswer("primaryResidence", option);
   };
 
   const handleNext = () => {
     nextStep();
   };
 
+  const handlePrevious = () => {
+    prevStep();
+  };
+
   return (
     <div className="space-y-4 h-full max-w-4xl mx-auto w-full flex flex-col pt-20 items-center">
-      <h2 className="text-5xl  text-center max-w-[20ch] font-primary font-medium">
-        Let&apos;s start! What would you like to do first?
+      {formState.history.length > 1 && (
+        <div
+          className=" cursor-pointer flex items-center gap-4"
+          onClick={handlePrevious}
+        >
+          <div className=" bg-secondary/30 hover:bg-secondary p-4 rounded-full">
+            <ArrowLeft />
+          </div>
+          <p className=" text-xl">Previous</p>
+        </div>
+      )}
+      <h2 className="text-5xl  text-center max-w-[24ch] font-primary font-medium">
+        Will this be your primary residence?
       </h2>
-      <p className=" text-lg text-muted-foreground text-center max-w-[40ch]">
-        This will help us personalize your experience and match you with the
-        right loan.
-      </p>
 
-      <div className="w-full px-32">
+      <div className="w-full mt-4 px-32">
         <RadioGroup
           value={selectedOption}
           onValueChange={handleOptionSelect}
@@ -39,7 +50,7 @@ const Start = () => {
             }`}
           >
             <Label htmlFor="optionA" className="cursor-pointer w-full">
-              Buy
+              Yes
             </Label>
             <RadioGroupItem value="optionA" id="optionA" />
           </div>
@@ -51,9 +62,22 @@ const Start = () => {
             }`}
           >
             <Label htmlFor="optionB" className="cursor-pointer w-full">
-              Refinance
+              No, it’s an investment
             </Label>
             <RadioGroupItem value="optionB" id="optionB" />
+          </div>
+
+          <div
+            className={`flex items-center justify-between rounded-2xl border px-8 py-8 ${
+              selectedOption === "optionC"
+                ? "border-primary border-2 bg-primary/5"
+                : ""
+            }`}
+          >
+            <Label htmlFor="optionC" className="cursor-pointer w-full">
+              No, it’s my second home
+            </Label>
+            <RadioGroupItem value="optionC" id="optionC" />
           </div>
         </RadioGroup>
       </div>
@@ -66,13 +90,9 @@ const Start = () => {
         >
           Continue
         </button>
-        <p className=" text-lg">
-          Already have an account?{" "}
-          <span className=" underline cursor-pointer text-primary">Login</span>
-        </p>
       </div>
     </div>
   );
 };
 
-export default Start;
+export default Step7a;

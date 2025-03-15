@@ -10,27 +10,27 @@ import { useForm } from "@/lib/form-context";
 import { ArrowLeft } from "lucide-react";
 import { useForm as useZodForm } from "react-hook-form";
 
-import { purchasePriceSchema } from "@/schema";
+import { grossIncomeSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-type PurchasePriceValues = z.infer<typeof purchasePriceSchema>;
+type GrossIncomeValues = z.infer<typeof grossIncomeSchema>;
 
-const Step4a = () => {
+const Step9a = () => {
   const { formState, setAnswer, nextStep, prevStep } = useForm();
 
-  const purchasePriceData = (formState.answers.purchasePrice ||
-    {}) as PurchasePriceValues;
+  const grossIncomeData = (formState.answers.grossIncome ||
+    {}) as GrossIncomeValues;
 
-  const form = useZodForm<PurchasePriceValues>({
-    resolver: zodResolver(purchasePriceSchema),
+  const form = useZodForm<GrossIncomeValues>({
+    resolver: zodResolver(grossIncomeSchema),
     defaultValues: {
-      price: purchasePriceData.price || "",
+      amount: grossIncomeData.amount || "",
     },
   });
 
-  const onSubmit = (values: PurchasePriceValues) => {
-    setAnswer("purchasePrice", values);
+  const onSubmit = (values: GrossIncomeValues) => {
+    setAnswer("grossIncome", values);
     nextStep();
   };
 
@@ -53,19 +53,23 @@ const Step4a = () => {
       )}
 
       <h2 className="text-5xl  text-center max-w-[20ch] font-primary font-medium">
-        What’s the finalized purchase price?
+        What is your total yearly income before taxes?
       </h2>
+      <p className=" text-lg text-muted-foreground text-center max-w-[40ch]">
+        A rough estimate is fine for now—be sure to include any co-borrower’s
+        income as well.
+      </p>
       <div className="w-full mt-6 px-32">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="">
             <FormField
               control={form.control}
-              name="price"
+              name="amount"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <Input
-                      placeholder="Please enter the purchase price"
+                      placeholder="Please enter your total gross income"
                       {...field}
                     />
                   </FormControl>
@@ -88,4 +92,4 @@ const Step4a = () => {
   );
 };
 
-export default Step4a;
+export default Step9a;

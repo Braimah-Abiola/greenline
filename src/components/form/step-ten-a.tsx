@@ -3,12 +3,12 @@ import { useForm } from "@/lib/form-context";
 import { ArrowLeft } from "lucide-react";
 import { Label } from "../ui/label";
 
-const Step1a = () => {
+const Step10a = () => {
   const { formState, setAnswer, nextStep, prevStep } = useForm();
-  const selectedOption = String(formState.answers.question1a || "");
+  const selectedOption = String(formState.answers.creditScore || "");
 
   const handleOptionSelect = (option: string) => {
-    setAnswer("question1a", option);
+    setAnswer("creditScore", option);
   };
 
   const handleNext = () => {
@@ -32,8 +32,8 @@ const Step1a = () => {
           <p className=" text-xl">Previous</p>
         </div>
       )}
-      <h2 className="text-5xl  text-center max-w-[18ch] font-primary font-medium">
-        Do you have a signed Purchase & Sale Agreement in place?
+      <h2 className="text-5xl  text-center max-w-[20ch] font-primary font-medium">
+        How would you rate your credit score?
       </h2>
 
       <div className="w-full mt-4 px-32">
@@ -50,7 +50,7 @@ const Step1a = () => {
             }`}
           >
             <Label htmlFor="optionA" className="cursor-pointer w-full">
-              Yes, I do
+              Above 740
             </Label>
             <RadioGroupItem value="optionA" id="optionA" />
           </div>
@@ -62,14 +62,52 @@ const Step1a = () => {
             }`}
           >
             <Label htmlFor="optionB" className="cursor-pointer w-full">
-              Nope, not now
+              700 - 739
             </Label>
             <RadioGroupItem value="optionB" id="optionB" />
+          </div>
+
+          <div
+            className={`flex items-center justify-between rounded-2xl border px-8 py-8 ${
+              selectedOption === "optionC"
+                ? "border-primary border-2 bg-primary/5"
+                : ""
+            }`}
+          >
+            <Label htmlFor="optionC" className="cursor-pointer w-full">
+              640 - 699
+            </Label>
+            <RadioGroupItem value="optionC" id="optionC" />
+          </div>
+          <div
+            className={`flex items-center justify-between rounded-2xl border px-8 py-8 ${
+              selectedOption === "optionD"
+                ? "border-primary border-2 bg-primary/5"
+                : ""
+            }`}
+          >
+            <Label htmlFor="optionD" className="cursor-pointer w-full">
+              580 - 639
+            </Label>
+            <RadioGroupItem value="optionD" id="optionD" />
+          </div>
+
+          <div
+            className={`flex items-center justify-between rounded-2xl border px-8 py-8 ${
+              selectedOption === "optionE"
+                ? "border-primary border-2 bg-primary/5"
+                : ""
+            }`}
+          >
+            <Label htmlFor="optionE" className="cursor-pointer w-full">
+              Less than 580
+            </Label>
+            <RadioGroupItem value="optionE" id="optionE" />
           </div>
         </RadioGroup>
       </div>
 
-      <div className="mt-20 w-full flex flex-col gap-8 items-center justify-center">
+      <div className="mt-8 w-full flex flex-col gap-8 items-center justify-center">
         <button
           onClick={handleNext}
           disabled={!selectedOption}
@@ -82,4 +120,4 @@ const Step1a = () => {
   );
 };
 
-export default Step1a;
+export default Step10a;

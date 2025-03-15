@@ -3,12 +3,12 @@ import { useForm } from "@/lib/form-context";
 import { ArrowLeft } from "lucide-react";
 import { Label } from "../ui/label";
 
-const Step1a = () => {
+const Step7c = () => {
   const { formState, setAnswer, nextStep, prevStep } = useForm();
-  const selectedOption = String(formState.answers.question1a || "");
+  const selectedOption = String(formState.answers.propertyType || "");
 
   const handleOptionSelect = (option: string) => {
-    setAnswer("question1a", option);
+    setAnswer("propertyType", option);
   };
 
   const handleNext = () => {
@@ -32,8 +32,8 @@ const Step1a = () => {
           <p className=" text-xl">Previous</p>
         </div>
       )}
-      <h2 className="text-5xl  text-center max-w-[18ch] font-primary font-medium">
-        Do you have a signed Purchase & Sale Agreement in place?
+      <h2 className="text-5xl  text-center max-w-[24ch] font-primary font-medium">
+        What kind of property is it?
       </h2>
 
       <div className="w-full mt-4 px-32">
@@ -50,7 +50,7 @@ const Step1a = () => {
             }`}
           >
             <Label htmlFor="optionA" className="cursor-pointer w-full">
-              Yes, I do
+              Single-family
             </Label>
             <RadioGroupItem value="optionA" id="optionA" />
           </div>
@@ -62,9 +62,35 @@ const Step1a = () => {
             }`}
           >
             <Label htmlFor="optionB" className="cursor-pointer w-full">
-              Nope, not now
+              Multi-family
             </Label>
             <RadioGroupItem value="optionB" id="optionB" />
+          </div>
+
+          <div
+            className={`flex items-center justify-between rounded-2xl border px-8 py-8 ${
+              selectedOption === "optionC"
+                ? "border-primary border-2 bg-primary/5"
+                : ""
+            }`}
+          >
+            <Label htmlFor="optionC" className="cursor-pointer w-full">
+              Condo
+            </Label>
+            <RadioGroupItem value="optionC" id="optionC" />
+          </div>
+
+          <div
+            className={`flex items-center justify-between rounded-2xl border px-8 py-8 ${
+              selectedOption === "optionD"
+                ? "border-primary border-2 bg-primary/5"
+                : ""
+            }`}
+          >
+            <Label htmlFor="optionD" className="cursor-pointer w-full">
+              Other
+            </Label>
+            <RadioGroupItem value="optionD" id="optionD" />
           </div>
         </RadioGroup>
       </div>
@@ -82,4 +108,4 @@ const Step1a = () => {
   );
 };
 
-export default Step1a;
+export default Step7c;

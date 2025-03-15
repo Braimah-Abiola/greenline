@@ -6,39 +6,31 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { US_STATES } from "@/constants";
 import { useForm } from "@/lib/form-context";
-import { addressSchema } from "@/schema";
+import { registerSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import { useForm as useZodForm } from "react-hook-form";
 import * as z from "zod";
 
-type AddressFormValues = z.infer<typeof addressSchema>;
+type AccountDataFormValues = z.infer<typeof registerSchema>;
 
-const Step2a = () => {
+const StepRegister = () => {
   const { formState, setAnswer, nextStep, prevStep } = useForm();
 
   // Get existing address data from form context
-  const addressData = (formState.answers.propertyAddress ||
-    {}) as AddressFormValues;
+  const accountData = (formState.answers.accountDetails ||
+    {}) as AccountDataFormValues;
 
   // Set up form with zod validation
-  const form = useZodForm<AddressFormValues>({
-    resolver: zodResolver(addressSchema),
+  const form = useZodForm<AccountDataFormValues>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
-      streetAddress: addressData.streetAddress || "",
-      unitApt: addressData.unitApt || "",
-      city: addressData.city || "",
-      state: addressData.state || "",
-      zipCode: addressData.zipCode || "",
+      email: accountData.email || "",
+      firstName: accountData.firstName || "",
+      lastName: accountData.lastName || "",
+      phoneNumber: accountData.phoneNumber || "",
     },
   });
 
@@ -46,9 +38,9 @@ const Step2a = () => {
     prevStep();
   };
 
-  const onSubmit = (values: AddressFormValues) => {
+  const onSubmit = (values: AccountDataFormValues) => {
     // Save form data to the form context
-    setAnswer("propertyAddress", values);
+    setAnswer("accountDetails", values);
     nextStep();
   };
 
@@ -66,23 +58,57 @@ const Step2a = () => {
         </div>
       )}
 
-      <h2 className="text-5xl  text-center max-w-[24ch] font-primary font-medium">
-        What is the address of the property?
+      <div className=" aspect-square h-32 relative">
+        <Image fill src="/assets/illustration-2.png" alt="Illustration" />
+      </div>
+
+      <h2 className="text-5xl  text-center max-w-[20ch] font-primary font-medium">
+        Let&apos;s keep your details secure by setting up your profile.
       </h2>
+
+      <p className=" text-lg text-muted-foreground text-center max-w-[60ch]">
+        Provide a few details, and we&apos;ll dive into the loan specifics.
+      </p>
 
       <div className="w-full mt-4 px-32">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="grid grid-cols-3 gap-y-4 gap-x-4"
+            className="grid grid-cols-2 gap-y-4 gap-x-4"
           >
             <FormField
               control={form.control}
-              name="streetAddress"
+              name="firstName"
+              render={({ field }) => (
+                <FormItem className=" col-span-1">
+                  <FormControl>
+                    <Input placeholder="First name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem className=" col-span-1">
+                  <FormControl>
+                    <Input placeholder="Last name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
               render={({ field }) => (
                 <FormItem className=" col-span-2">
                   <FormControl>
-                    <Input placeholder="Street Address" {...field} />
+                    <Input placeholder="Email address" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -91,64 +117,11 @@ const Step2a = () => {
 
             <FormField
               control={form.control}
-              name="unitApt"
+              name="phoneNumber"
               render={({ field }) => (
-                <FormItem className=" col-span-1">
+                <FormItem className=" col-span-2">
                   <FormControl>
-                    <Input placeholder="Unit/Apt No." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem className=" col-span-1">
-                  <FormControl>
-                    <Input placeholder="City" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="state"
-              render={({ field }) => (
-                <FormItem className=" col-span-1">
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="State" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {US_STATES.map((state) => (
-                        <SelectItem key={state.value} value={state.value}>
-                          {state.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="zipCode"
-              render={({ field }) => (
-                <FormItem className=" col-span-1">
-                  <FormControl>
-                    <Input placeholder="Zip code" {...field} />
+                    <Input placeholder="Phone number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -170,4 +143,4 @@ const Step2a = () => {
   );
 };
 
-export default Step2a;
+export default StepRegister;

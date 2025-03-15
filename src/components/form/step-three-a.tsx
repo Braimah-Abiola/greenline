@@ -47,7 +47,7 @@ const Step3a = () => {
           <p className=" text-xl">Previous</p>
         </div>
       )}
-      <h2 className="text-5xl font-bold text-center max-w-[24ch]">
+      <h2 className="text-5xl  text-center max-w-[24ch] font-primary font-medium">
         Sounds exciting! When is your closing date?
       </h2>
 
@@ -61,10 +61,10 @@ const Step3a = () => {
                 !date && "text-muted-foreground"
               )}
             >
-              <span className="flex-1">
+              <span className="flex-1 px-2">
                 {date ? format(date, "PPP") : "Select a date"}
               </span>
-              <CalendarIcon className="mr-2 group-hover:text-primary h-6 w-6 scale-150" />
+              <CalendarIcon className="mr-4 group-hover:text-primary h-6 w-6 scale-150" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="center">
