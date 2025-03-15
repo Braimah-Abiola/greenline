@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 interface FormAnswers {
   start?: string;
   question1a?: string;
+  question1b?: string;
   propertyAddress?: {
     streetAddress: string;
     unitApt?: string;
